@@ -18,7 +18,7 @@ clean-targets:
 
 models:
   mark:
-    +database: "{{env_var('PROJECT_NAME')}}_DEV_DATA"
+    +database: BJORN_TEST_UNIT
     example:
       +materialized: view
       +schema: marketing

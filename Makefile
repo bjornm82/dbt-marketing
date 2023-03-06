@@ -21,7 +21,7 @@ VOLUMES?=-v ${VOLUME_PROFILE} -v ${VOLUME_PROJECT}
 
 .PHONY: dbt-deps
 dbt-deps:
-	docker run --rm -v ${VOLUME_PACKAGES} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} deps
+	docker run --rm -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} deps
 
 .PHONY: login
 login:
