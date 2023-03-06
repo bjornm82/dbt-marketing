@@ -16,17 +16,16 @@ IMAGE?=${HUB}/${REPO}
 
 VOLUME_PROFILE?=~/.dbt/profiles.yml:/root/.dbt/profiles.yml
 VOLUME_PROJECT?=$(PWD)/mark:/usr/app/snow/dbt_packages/mark
+VOLUME_PACKAGES?=$(PWD)/mark/dbt_packages:/usr/app/snow/dbt_packages/mark
+VOLUMES?=-v ${VOLUME_PROFILE} -v ${VOLUME_PROJECT}
 
 .PHONY: dbt-deps
 dbt-deps:
-	docker run -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} deps
+	docker run --rm -v ${VOLUME_PACKAGES} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} deps
 
 .PHONY: login
 login:
 	aws ecr get-login-password --region ${AWS_REGION} --profile ${AWS_PROFILE} | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
-
-DEBUG_LOG_ARGS?=${DEBUG_VALUE} ${LOG_FORMAT_VALUE}
-VOLUMES?=-v ${VOLUME_PROFILE} -v ${VOLUME_PROJECT}
 
 .PHONY: dbt-init
 dbt-init:
