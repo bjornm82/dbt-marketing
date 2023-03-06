@@ -16,7 +16,6 @@ IMAGE?=${HUB}/${REPO}
 
 VOLUME_PROFILE?=~/.dbt/profiles.yml:/root/.dbt/profiles.yml
 VOLUME_PROJECT?=$(PWD)/mark:/usr/app/snow/dbt_packages/mark
-VOLUME_PACKAGES?=$(PWD)/mark/dbt_packages:/usr/app/snow/dbt_packages/mark
 VOLUMES?=-v ${VOLUME_PROFILE} -v ${VOLUME_PROJECT}
 
 .PHONY: dbt-deps
@@ -29,13 +28,13 @@ login:
 
 .PHONY: dbt-init
 dbt-init:
-	docker run --rm ${VOLUMES} -e PROJECT_NAME=${PROJECT_NAME} -e ENV=${GIT_VERSION} -it ${IMAGE} ${DEBUG_LOG_ARGS} init
+	docker run --rm ${VOLUMES} -e PROJECT_NAME=${PROJECT_NAME} -e ENV=${GIT_VERSION} -it ${IMAGE} init
 
 .PHONY: dbt-clean
 dbt-clean:
-	docker run --rm ${VOLUMES} -e ENV=${GIT_VERSION} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE} ${DEBUG_LOG_ARGS} clean
+	docker run --rm ${VOLUMES} -e ENV=${GIT_VERSION} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE} clean
 
 .PHONY: dbt-run
 dbt-run:
-	docker run --rm ${VOLUMES} -e ENV=${GIT_VERSION} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} ${DEBUG_LOG_ARGS} run
+	docker run --rm ${VOLUMES} -e ENV=${GIT_VERSION} -e PROJECT_NAME=${PROJECT_NAME} -it ${IMAGE}:${VERSION} run
 
