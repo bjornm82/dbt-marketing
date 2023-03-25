@@ -16,9 +16,6 @@ jobs:
     - uses: actions/checkout@main
       with:
         name: bjornm82/dbt-snowboard
-
-    -
-      name: update file and push to remote
       run: |
           echo "Test push commit to the remote in the workflow" >> test.txt
           git config --global user.name "bjornm82"
