@@ -16,6 +16,7 @@ jobs:
         env:
             ACCESS_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
       - run: |
+            git config --global user.email "{{secrets.EMAIL_ADDRESS}}"
             git config --global user.name "bjornm82"
             git config --global credential.helper cache
             git clone https://${{secrets.ACCESS_TOKEN}}@github.com/bjornm82/dbt-snowboard
