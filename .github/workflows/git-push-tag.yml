@@ -14,16 +14,18 @@ jobs:
       - uses: actions/checkout@v2
         env:
             ACCESS_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
-      - run: |
-            echo "::group::Git Rev"
-            echo git rev-parse --abbrev-ref HEAD
-            echo "::endgroup::"
+      - name: Set git tag
+        run: |
+            echo "::set-output git_tag=GIT_TAG::${{git rev-parse --abbrev-ref HEAD}}"
+        id: set-git-tag
+      - name: Checkout dbt snowboard replace and push
+        run: |
             git config --global user.email "${{secrets.EMAIL_ADDRESS}}"
             git config --global user.name "bjornm82"
             git config --global credential.helper cache
             git clone https://bjornm82:${{secrets.ACCESS_TOKEN}}@github.com/bjornm82/dbt-snowboard
             cd dbt-snowboard
-            sed -r -i "s/MARK_BRANCH','([0-9])+(.)+([0-9])+(.)+([0-9])+/MARK_BRANCH','0.0.6/g" snow/packages.yml
+            sed -r -i "s/MARK_BRANCH','([0-9])+(.)+([0-9])+(.)+([0-9])+/MARK_BRANCH','"${{steps.set-git-tag.outputs.GIT_TAG}}"/g" snow/packages.yml
             git add .
             git commit -m "$(date)"
             git push
