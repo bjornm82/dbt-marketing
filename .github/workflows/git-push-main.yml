@@ -17,3 +17,4 @@ jobs:
             echo "::group::Git Rev"
             echo git rev-parse --abbrev-ref HEAD
             echo "::endgroup::"
+            ls -lah
