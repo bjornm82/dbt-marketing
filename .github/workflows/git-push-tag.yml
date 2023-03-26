@@ -29,4 +29,5 @@ jobs:
             git add .
             git commit -m "$(date)"
             git push
-
+    outputs:
+      git-tag: ${{steps.set-git-tag.outputs.GIT_TAG}}
