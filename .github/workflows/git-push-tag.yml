@@ -15,7 +15,7 @@ jobs:
         env:
             ACCESS_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
       - name: Set env
-        run: echo "GITHUB_SHA_SHORT=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+        run: echo "GITHUB_SHA_SHORT=$(git describe --tags --always)" >> $GITHUB_ENV
       - name: Test
         run: echo $GITHUB_SHA_SHORT
       - name: Checkout dbt snowboard replace and push
