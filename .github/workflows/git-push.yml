@@ -16,6 +16,8 @@ jobs:
         env:
             ACCESS_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
       - run: |
+            GIT_VERSION?=$(shell git rev-parse --abbrev-ref HEAD)
+            echo ${GIT_VERSION}
             git config --global user.email "${{secrets.EMAIL_ADDRESS}}"
             git config --global user.name "bjornm82"
             git config --global credential.helper cache
