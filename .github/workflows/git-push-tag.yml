@@ -1,10 +1,9 @@
-name: Makefile CI
+name: Running on tag
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+    - '*'
 
 jobs:
   build:
@@ -28,3 +27,4 @@ jobs:
             git add .
             git commit -m "$(date)"
             git push
+
