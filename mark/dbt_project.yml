@@ -18,7 +18,7 @@ clean-targets:
 
 models:
   mark:
-    +database: BJORN_TEST_UNIT
+    +database: mark
     example:
       +materialized: view
       +schema: marketing
