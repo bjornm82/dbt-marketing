@@ -18,7 +18,8 @@ clean-targets:
 
 models:
   mark:
-    +database: mark
+    +database: postgres
+    +schema: mark
     example:
       +materialized: view
       +schema: marketing
