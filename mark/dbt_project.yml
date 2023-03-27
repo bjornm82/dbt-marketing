@@ -18,7 +18,7 @@ clean-targets:
 
 models:
   mark:
-    +database: iceberg
+    +database: postgres
     +schema: mark
     example:
       +materialized: view
