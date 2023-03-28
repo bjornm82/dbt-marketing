@@ -4,6 +4,9 @@ version: 2
 models:
   - name: marketing_first_model
     description: '{{ doc("marketing_first_model_docs") }}'
+    config:
+      grants:
+        select: ['fina']
     columns:
       - name: id
         description: "The primary key for this table"
